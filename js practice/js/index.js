@@ -434,4 +434,106 @@ const users = {
 for (let key in users){//keyle gezecek
     console.log(key,users[key]);//name,age yazdiracaq
 } 
+
+
+//window obyekti icindekiler
+
+//console.log(window);//yazdirir this,window eynidi
+//console.log(this);//ustunde oldugumuz documentasiya
+//console.log(this.alert("hello"));//ekrana yazdirir
+
+//alert
+//alert("Hello");//ekrana qutu cixarir
+//const cavab = confirm("eminsen?");
+//console.log(cavab);//tamam bassaq true,iptal bassaq false deyer donecek
+ 
+//if(confirm("eminsen?")){
+//    console.log("sil getsin");
+//}
+//else{
+//    console.log("silme");
+//}
+
+//prompt input alma
+
+const cavab = prompt("2+2=?");
+if(cavab == "4"){
+    console.log("dogru");
+}
+else{
+    console.log("dogru deyil");
+}
+//console.log(cavab);
+
+
+let value;
+value = window.location;//saytin unvani
+value = window.location.host;//saytin hostu
+value = window.location.hostname;//hostname adi
+value = window.location.port;//portun verecek
+value = window.location.href;//hal hazirki address
+
+//if (confirm("seyfe yenilensin?")){
+ //   window.location.reload;//istifadeci istese yenilenecek;
+//}
+//else{
+//   console.log("seyfe yenilenmedi");
+//}
+
+value = window.outerHeight;//seyfede olan herseyi qebul ederek hundurluyu yazdirir
+value = window.outerWidth;//cubuqlar daxil enini olcecek
+
+
+value = window.innerHeight;//devtools dan yuxari pencerinin hundurluyunu yazir
+value = window.innerWidth;//cubuqlari olcuye qatmadan genisliyi yazdirir
+value = window.scrollX;//yatay yonde scroll olcusu gosterir
+value = window.scrollY;//dikey yonde scrool olcusunun yazdirir
+
+
+console.log(value);
+
+
+//scope kapsam kavrami
+
+//global scope- hec bir funksiyanin  icinde olmayanlar
+
+var value1 = 10;
+let value2 = 20;
+const value3 = 30;
+
+//function gun(){
+//    var value1 = 40;
+//    var value2 = 50;
+//    var value3 = 60;
+  
+//    console.log(value1,value2,value3);
+//}
+//gun();
+
+
+//block scope -her hansi funksiyanin ifin icinde olan deyerler
+
+if(true){
+    var value1 = 40;
+    let value2 = 50;
+    const value3 = 60;//block icindeki var lar kenardada cagirarken gelirler const ve let ise gelmir
+
+    console.log(value1,value2,value3); 
+}
+
+//console.log(a);
+//console.log(b);
+//console.log(c);
+
+console.log(value1,value2,value3);
+
+//function a(){//function scope 
+
+}
+
+var database ="12345";
+
+if(true){//let ve const istifade etmeliyik.
+   var database ="8552211"; //blocda deyisiklik edende coldekininde deyyeri deyisir ve geri gelmir
+}
 */
