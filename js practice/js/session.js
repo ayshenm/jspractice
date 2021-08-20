@@ -75,7 +75,7 @@ localStorage.setItem("todos",JSON.stringify(todos));//arrey kimi yazacaq
 //const value = localStorage.getItem("todos");
 const value = JSON.parse(localStorage.getItem("todos"));
 console.log(value);
-*/
+
 
 const form = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo");
@@ -107,3 +107,4 @@ function addTodo(e){
 
   e.preventDefault();
 }
+*/
