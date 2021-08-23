@@ -442,10 +442,345 @@ for(let value of myset){
 //setlerden arrey yaratma
 const array1 = Array.from(myset);
 console.log(array1);
+
+
+
+
+//obyektyonumlu programa
+//constructorlar ve object yaratma
+
+console.log(this);
+
+const emp1 ={//object literal
+    name: "Aisha",
+    age:  25,
+    showInfos:function(){console.log("Bilgiler yiklendi")}
+};
+const emp2 = {
+    name: "Elcan",
+    age: 23
+
+}
+//emp1.salary = 4000;
+//emp1.showInfos();
+//console.log(emp1);
+
+//constructor yaratma
+
+
+//function Employe(){//boyuk herfle baslamagi onemlidir
+//    this.name = "Aysen";//this deyende employe nezerde tutulur
+//}
+    
+
+const emp3 = new Employe();//employeden yaradiriq
+const emp4 = new Employe();
+console.log(emp3);
+console.log(emp4);
+
+//daha dogru qayda beledir
+
+function Employe(name,age,salary){
+      this.name = name;
+      this.age = age;
+      this.salary = salary;
+
+      //console.log(this);
+      this.showInfos = function(){console.log(this.name,this.age,this.salary)};
+}
+ const emp5 = new Employe("Aisa",25,1000);
+ const emp6 = new Employe("Eli",70,700);
+
+ emp5.showInfos();
+ emp6.showInfos();
+//console.log(emp5);
+//console.log(emp6);
+
+
+//Prototype lar - iki obyektin ortaq ozellikleri prototypde toplanir
+
+function Employe(name,age){
+    this.name = name;
+    this.age = age;
+    this.showInfos = function (){
+        console.log("yazdirilir")
+    }
+    this.toString = function(){
+        console.log("employe obje")
+    };
+}
+const emp7 = new Employe("riva", 55);
+console.log(emp7);
+const emp8 = new Employe("hal", 7);
+console.log(emp8);
+
+emp7.showInfos();
+emp8.showInfos();
+
+emp7.toString();
+console.log(emp7.toString());//object object yazilacaq
+
+function Employ (name,age){
+    this.name = name;
+    this.age = age;
+    this.showInfos = function(){
+        console.log("Ad:" + this.name + "yas" + this.age);
+    }
+}
+const emp8 = new Employ("roya",7);
+const emp9 = new Employ("arzu", 8);
+
+console.log(emp8);
+console.log(emp9);
+
+
+
+
+function Employy (name,age){
+    this.name = name;
+    this.age = age;
+   
+}
+
+Employy.prototype.showInfos = function(){
+    console.log("Ad:" + this.name + "yas" + this.age);//prototipe yazildi
+}
+
+
+
+
+const emp18 = new Employy("royil",17);
+const emp19 = new Employy("arzuy", 18);
+emp18.showInfos();
+
+console.log(emp18);
+console.log(emp19);
+
+
+//Object create();prototype basqa elementden almaq ucun
+
+const obj ={
+    test1:function(){
+        console.log("Test 1");
+    },
+    test2:function(){
+        console.log("Test 2");
+    }
+}
+//console.log(obj);
+
+const emp = Object.create(obj);
+emp.name =  "ayi";
+emp.age = 9;
+console.log(emp);
+
+
+function Person(){
+
+}
+Person.prototype.test1 = function(){
+    console.log("test 1");
+}
+
+Person.prototype.test2 = function(){
+    console.log("test 2");
+}
+
+//const person = new Person();
+//console.log(person);
+
+function Emplo(name,age){
+    this.name = name;
+    this.age = age;
+
+}
+Emplo.prototype=Object.create(Person.prototype);
+Emplo.prototype.myTest = function(){
+    console.log(myTest);
+}
+
+const emo = new Emplo("ayise",25);
+console.log(emo);
+
+emo.test1();
+
+
+//function prototype-CALL,APPLY BIND FUNKSIYALRI
+//basqa constraktiri cagirmaq ucun call apply istifade ede bilerik
+const obj1 ={
+    number1:10,
+    number2:20
+};
+
+const obj2 ={
+    number1:30,
+    number2:40
+};
+
+function addNumbers(number3,number4){
+    //console.log(this);
+    //console.log(this.number1);
+    console.log(this.number1 + this.number2 + number3 + number4);//this-obj1 ve this.obj2 nin yerine kecir
+}
+//addNumbers(100,200);
+//call cagirmasaq this windowsu gosterecek ve consola NaN yazilacaq!
+//addNumbers.call(obj1,100,200);
+//addNumbers.call(obj2,100,200);
+
+
+
+//apply metodu call daki kimi yox array seklinde verilmelidir
+
+//addNumbers.apply(obj1,[300,500]);//number3,number4
+//addNumbers.apply(obj2,[6,8]);//number3,number4
+
+//bind ojectleri bir birine baglayir,en cox eventlerle istifade olunur
+
+function getNumbersTotal(number3,number4){
+    return this.number1 + this.number2 + number3 + number4;
+}
+const copyFunc1 = getNumbersTotal.bind(obj1);
+const copyFunc2 = getNumbersTotal.bind(obj2);
+
+
+
+console.log(copyFunc1(1,5));
+console.log(copyFunc2(8,2));
+
+
+//prototype tabanli kalitim(inheritance) basqa obyektden ozellikleri miras alma
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+Person.prototype.showInfos = function(){
+    console.log("Isim: " + this.name  + " yas " + this.age);
+}
+
+//const person = new Person("Elis",23);
+//console.log(person);
+
+function Employe(name,age,salary){
+    this.name = name;
+    this.age = age;
+    this.salary = salary;
+    Person.call(this,name,age);
+}
+Employe.prototype = Object.create(Person.prototype);
+Employe.prototype.toString = function(){
+    console.log("Employe");
+}
+//overriding ve ya legv etme
+Employe.prototype.showInfos = function(){
+    console.log("Isim: " + this.name  + " yas " + this.age  + " maas: " + this.salary);
+}
+
+
+const emp = new Employe("Mustafa",25,4000);
+//console.log(emp);
+//emp.showInfos();
+//emp.toString();
+//console.log(emp.toString());
+
+console.log(emp);
+
+
+//es6 classlari
+
+//kohne stilde
+
+function Employee(name,age,salary){
+    this.name = name;
+    this.age = age;
+    this.salary = salary;
+}
+
+Employee.prototype.showInfos = function(){
+    console.log("Isim: " + this.name + "Yas: " + this.age + "Maas: " + this.salary);
+
+}
+const emp = new Employee("Aysen",25,4000);
+console.log(emp);
+
+
+//es6 da bele yazilir classlarla'
+
+class Employ{
+    constructor(name,age,salary){//function uyazmasaqda isleyr
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+
+    }
+    showInfos(){
+       console.log( "Isim: "  +  this.name + " Yas: " + this.age + " Maas: " + this.salary);
+    }
+}
+const emp = new Employ("Gulsen",75,890);
+//console.log(emp);
+emp.showInfos();
+
+
+//Static metodlar
+ 
+class Cebr{
+
+
+    cube(x){
+        console.log(x * x * x);
+    }
+}
+const math = new Cebr();
+math.cube(3);
+console.log(math);
+
+//static
+
+class Hero{
+
+
+  static  square(x){
+        console.log(x * x * x);
+    }
+}
+Hero.square(7);
+
+
+//kalitim- inheritance es6
+
+class Person{//superclass baseclass
+    constructor(name,age,salary){
+        this. name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+    showInfos(){
+        console.log( "Isim: "  +  this.name + " Yas: " + this.age + " Maas: " + this.salary);
+    }
+}
+class Emplo extends Person{//derivedclass,subclass,childclass
+    constructor(name,age,salary){
+        //this.name = name;
+        //this.age = age;
+        super(name,age,salary) //yuxaridaki costructoru istifade edeceyimizi soyleyecek//call etdiklerin etdi
+        //super.showInfos()  //yuxaridaki constructorun infosun alacaq         
+        this.salary = salary;
+    }
+    showInfos(){//overriding
+        console.log( "Isim: "  +  this.name + " Yas: " + this.age + " Maas: " + this.salary);
+    }//bu isleyyecem burda oldugu ucun
+    toString(){//overriding
+        console.log("Emplo");
+    }
+    raiseSalary(amount){//extra metod
+        this.salary =  this.salary + amount;
+
+    }
+}
+const emp = new Emplo("Ravid",20,5000);
+emp.raiseSalary(25);
+//emp.showInfos()//yuxari construktordan miras oldugu ucun yazilacaq
+//console.log(emp);
+emp.showInfos();
+emp.toString();
 */
-
-
-
-
-
-
